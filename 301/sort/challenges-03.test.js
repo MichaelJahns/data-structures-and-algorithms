@@ -138,17 +138,17 @@ const meetings = [
 ];
 
 // const sortMeetingsByDay = (arr) => {
-const order = {Monday: 1, Tuesday: 2, Wednesday: 3, Thursday: 4, Friday: 5};
+  const order = {
+    Monday: 1, 
+    Tuesday: 2, 
+    Wednesday: 3, 
+    Thursday: 4, 
+    Friday: 5  };
 
-const sortMeetingsByDay = (arr) => {
-  return arr.sort( (a ,b) =>{
-    let day1 = a.Day;
-    let day2 = b.Day;
-    arr.sort( (a, b) => a.start > b.start);
-    arr.sort( (a , b) => a.end > b .end);
-    // return order[day1] - order[day2];
-  })
-};
+    const sortMeetingsByDay = (arr) => {
+      return arr.sort( (a, b) => order[a.day] - order[b.day])
+        console.log(meetings)
+      };
 
 
 /* ------------------------------------------------------------------------------------------------
