@@ -37,16 +37,9 @@ Write a function named citiesAtoJ that takes in an array of city names and uses 
 ------------------------------------------------------------------------------------------------ */
 
 const citiesAtoJ = (arr) => {
-  let regex = /(^\b[A-J]\w+)/g;
-  let temp = arr;
-  temp.forEach((value, idx) => {
-    if(regex.test(value) === false){
-      arr.splice(idx, 1)
-    }
-    return arr
-  })
-};
-
+  let regex = /(^[A-J])/g;
+  return arr.filter( (word) => word.match(regex));
+}
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 4
 
@@ -60,7 +53,7 @@ Do not use the vertical bar (pipe) in your pattern.
 ------------------------------------------------------------------------------------------------ */
 
 const matchMonth = (input) => {
-    let regex = /(oct)/i
+    let regex = /^[oO]ct(ober)?$/
     return regex.test(input)
   };
 
@@ -75,7 +68,8 @@ The expected output of "Hello, and have a wonderful day!" is ["and ", "have ", "
 ------------------------------------------------------------------------------------------------ */
 
 const noPunctuation = str => {
-  // Solution code here...
+  let regex = /[a-zA-Z]*(\s)/g
+  return str.match(regex)
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -175,7 +169,7 @@ describe('Testing challenge 4', () => {
   });
 });
 
-xdescribe('Testing challenge 5', () => {
+describe('Testing challenge 5', () => {
   const lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras lacinia vel massa sed egestas. Nunc faucibus iaculis elit, a scelerisque enim condimentum sed. Aenean ac scelerisque sem, et pharetra diam.';
 
   test('It should only return words that are immediately followed by a space', () => {
