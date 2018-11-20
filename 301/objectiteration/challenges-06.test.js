@@ -99,13 +99,17 @@ hasChildrenValues(characters, 'Eddard') will return false
 ------------------------------------------------------------------------------------------------ */
 
 const hasChildrenValues = (arr, character) => {
-  Object.values(arr).forEach((idx) => {
-    // console.log(idx.children)
-    if(idx.name === character){
-      return idx.children
-    }
-  })
-}
+    let hasChildren = false
+    
+    arr.forEach((val) => {
+      if(val.name === character){
+        if(Object.values(val.children).length > 0){
+          hasChildren = true;
+        }
+      }
+    })
+    return hasChildren
+  }
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 5
@@ -116,8 +120,17 @@ The input and output of this function are the same as the input and output from 
 ------------------------------------------------------------------------------------------------ */
 
 const hasChildrenEntries = (arr, character) => {
-  // Solution code here...
-}
+    let hasChildren = false
+    
+    arr.forEach((val) => {
+      if(val.name === character){
+        if(val.children.length > 0){
+          hasChildren = true;
+        }
+      }
+    })
+    return hasChildren
+  }
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 6 - Stretch Goal
@@ -131,7 +144,17 @@ For example: [{ house: 'Stark', members: 7 }, { house: 'Arryn', members: 3 }, ..
 
 const houseSize = (arr) => {
   const sizes = [];
-  // Solution code here...
+  arr.forEach((val) => {
+    let temp = 1
+    if(val.spouse !== null){
+      temp ++;
+    }
+    temp = temp + val.children.length
+
+    console.log(temp)
+    sizes.push({house: val.house, members: temp})
+
+  })
   return sizes;
 }
 
@@ -155,7 +178,15 @@ const deceasedSpouses = ['Catelyn', 'Lysa', 'Robert', 'Khal Drogo', 'Alerie'];
 
 const houseSurvivors = (arr) => {
   const survivors = [];
-  // Solution code here...
+  arr.forEach((val) => {
+    let temp = 1
+    if(val.spouse !== null && deceasedSpouses.includes(val.spouse) === false ){
+      temp ++;
+    }
+    temp += val.children.length
+    survivors.push({house: val.house, members: temp})
+
+  })
   return survivors;
 }
 
@@ -165,6 +196,7 @@ TESTS
 All the code below will verify that your functions are working to solve the challenges.
 
 DO NOT CHANGE any of the below code.
+
 
 Run your tests from the console: jest challenges-06.test.js
 
