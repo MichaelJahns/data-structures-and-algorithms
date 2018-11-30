@@ -68,14 +68,12 @@ findTagNames(['<div><h1>Hello, world!</h1></div>', '<p>Welcome to my site</p>'])
 ------------------------------------------------------------------------------------------------ */
 
 const findTagNames = elements => {
-    let regex = /\/.*?(?=>)/g
-    let output = [];
-    elements.map((val) => {
-      let up = val.match(regex)
-      output.push(up[0])
-    })
-    return output
-  }
+  let regex = /\/.*?(?=>)/g
+  return elements.reduce((acc, val) => {
+    acc.push(val.match(regex));
+    return acc
+  }, []).reduce((acc, val) => acc.concat(val));
+}
 
 /* ------------------------------------------------------------------------------------------------
 TESTS
